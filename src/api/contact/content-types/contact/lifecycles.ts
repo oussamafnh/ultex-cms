@@ -1,8 +1,17 @@
 import { google } from "googleapis";
 
+const processing = new Set<string>();
+
 export default {
-  async afterCreate(event: any) {
-    const { result } = event;
+  async beforeCreate(event: any) {
+    const data = event.params.data;
+
+    if (!data.nom || !data.email) return;
+
+    const key = `${data.nom}|${data.email}|${data.telephone}|${data.message}`;
+
+    if (processing.has(key)) return;
+    processing.add(key);
 
     try {
       const auth = new google.auth.JWT({
@@ -20,22 +29,22 @@ export default {
         requestBody: {
           values: [
             [
-              result.nom,
-              result.secteur,
-              result.telephone,
-              result.email,
-              result.pays_ville,
-              result.sujet,
-              result.message,
-              new Date(result.createdAt).toISOString().replace("T", " ").slice(0, 16),
+              data.nom,
+              data.secteur,
+              data.telephone,
+              data.email,
+              data.pays_ville,
+              data.sujet,
+              data.message,
+              new Date().toISOString().replace("T", " ").slice(0, 16),
             ],
           ],
         },
       });
-
-      console.log("✅ Google Sheets updated");
     } catch (err) {
-      console.error("❌ Google Sheets error:", err);
+      console.error(err);
+    } finally {
+      setTimeout(() => { processing.delete(key); }, 3000);
     }
   },
 };
