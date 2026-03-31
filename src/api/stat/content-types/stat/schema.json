@@ -14,11 +14,23 @@
     "chiffre": {
       "type": "integer"
     },
-    "label": {
+    "label_fr": {
       "type": "string"
     },
     "order": {
       "type": "integer"
+    },
+    "label_en": {
+      "type": "string"
+    },
+    "label_zh": {
+      "type": "string"
+    },
+    "label_ar": {
+      "type": "string"
+    },
+    "label_es": {
+      "type": "string"
     }
   }
 }

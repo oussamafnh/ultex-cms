@@ -1,16 +1,22 @@
 {
   "kind": "collectionType",
-  "collectionName": "events",
+  "collectionName": "testimonials",
   "info": {
-    "singularName": "event",
-    "pluralName": "events",
-    "displayName": "event"
+    "singularName": "testimonial",
+    "pluralName": "testimonials",
+    "displayName": "testimonials"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
     "image": {
       "type": "media",
       "multiple": false,
@@ -21,10 +27,7 @@
         "audios"
       ]
     },
-    "title": {
-      "type": "string"
-    },
-    "description": {
+    "message": {
       "type": "string"
     }
   }
